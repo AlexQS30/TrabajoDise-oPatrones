@@ -5,9 +5,9 @@
         <group>
             <file>file:/D:/UTP/CICLO%20V/DISEÑO%20DE%20PATRONES/New%20Folder/JavaApplication3/src/Vista/Login.java</file>
             <file>file:/D:/UTP/CICLO%20V/DISEÑO%20DE%20PATRONES/New%20Folder/JavaApplication3/src/Vista/Sistema.java</file>
-            <file>file:/D:/UTP/CICLO%20V/DISEÑO%20DE%20PATRONES/New%20Folder/JavaApplication3/src/Modelo/Conexion.java</file>
+            <file>file:/D:/UTP/CICLO%20V/DISEÑO%20DE%20PATRONES/New%20Folder/JavaApplication3/src/Modelo/ProductosDao.java</file>
             <file>file:/D:/UTP/CICLO%20V/DISEÑO%20DE%20PATRONES/New%20Folder/JavaApplication3/src/Modelo/ClienteDao.java</file>
-            <file>file:/D:/UTP/CICLO%20V/DISEÑO%20DE%20PATRONES/New%20Folder/JavaApplication3/src/Modelo/Cliente.java</file>
+            <file>file:/D:/UTP/CICLO%20V/DISEÑO%20DE%20PATRONES/New%20Folder/JavaApplication3/src/Reportes/Excel.java</file>
         </group>
     </open-files>
 </project-private>
