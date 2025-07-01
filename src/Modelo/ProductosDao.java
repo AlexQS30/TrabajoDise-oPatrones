@@ -34,7 +34,7 @@ public class ProductosDao {
         }
     }
     public void ConsultarProveedor(JComboBox proveedor){
-        String sql = "SELECT nombre FROM proveedor"; 
+        String sql = "SELECT * FROM proveedor WHERE nombre = ?"; 
         try{
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
@@ -131,4 +131,53 @@ public class ProductosDao {
              }
              return producto;
          }
+         
+          public Config BuscarDatos(){
+             Config conf = new Config();
+             String sql = "SELECT * FROM config";
+             try{
+                 con = cn.getConnection();
+                 ps = con.prepareStatement(sql);
+                 rs = ps.executeQuery();
+                 if (rs.next()) {
+                     conf.setId(rs.getInt("id"));
+                     conf.setRuc(rs.getInt("ruc"));
+                     conf.setNombre(rs.getString("nombre"));
+                     conf.setTelefono(rs.getInt("telefono"));
+                     conf.setDireccion(rs.getString("direccion"));
+                     conf.setDireccion(rs.getString("direccion"));
+                     
+                 }
+             }catch (SQLException e){
+                 System.out.println(e.toString());
+             }
+             return conf;
+         }
+          
+           public boolean ModificarDatos(Config conf){
+        String sql = "UPDATE config SET ruc=?, nombre=?, telefono=?, direccion=?, razon=? WHERE id=?";
+        try{
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, conf.getRuc());
+            ps.setString(2, conf.getNombre());
+            ps.setInt(3, conf.getTelefono());
+            ps.setString(4, conf.getDireccion());
+            ps.setString(5, conf.getRazon());
+            ps.setInt(6, conf.getId());
+            ps.execute();
+            return true;
+            
+        }catch (SQLException e){
+            System.out.println(e.toString());
+            return false;
+        }finally{
+            try{
+                con.close();
+            }catch(SQLException e){
+                System.out.println(e.toString());
+            }
+        }
+        
+    }
+           
 }
