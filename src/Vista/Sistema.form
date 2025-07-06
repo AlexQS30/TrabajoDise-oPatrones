@@ -166,7 +166,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="190" y="0" width="920" height="200"/>
+          <AbsoluteConstraints x="180" y="-90" width="920" height="200"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -223,10 +223,7 @@
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="260" max="32767" attributes="0"/>
-                                      <Component id="btnGraficar" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="btnGraficar" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>

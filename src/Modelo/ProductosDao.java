@@ -1,4 +1,3 @@
-
 package Modelo;
 
 import java.sql.Connection;
@@ -9,51 +8,53 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class ProductosDao {
+
     Connection con;
     Conexion cn = new Conexion();
     PreparedStatement ps;
     ResultSet rs;
-    
-    public boolean RegistrarProductos (Productos pro){
+
+    public boolean RegistrarProductos(Productos pro) {
         String sql = "INSERT INTO productos (codigo, nombre, proveedor, stock, precio) VALUES (?,?,?,?,?)";
-        try{
+        try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
             ps.setString(1, pro.getCodigo());
             ps.setString(2, pro.getNombre());
             ps.setString(3, pro.getProveedor());
-            ps.setInt (4, pro.getStock());
-            ps.setDouble(5, pro.getPrecio()); 
+            ps.setInt(4, pro.getStock());
+            ps.setDouble(5, pro.getPrecio());
             ps.execute();
             return true;
-        }catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.toString());
             return false;
         }
     }
-    public void ConsultarProveedor(JComboBox proveedor){
-        String sql = "SELECT * FROM proveedor WHERE nombre = ?"; 
-        try{
+
+    public void ConsultarProveedor(JComboBox proveedor) {
+        String sql = "SELECT * FROM proveedor WHERE nombre = ?";
+        try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 proveedor.addItem(rs.getString("nombre"));
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.toString());
         }
     }
-     public List ListarProductos(){
+
+    public List ListarProductos() {
         List<Productos> Listapro = new ArrayList();
         String sql = "SELECT * FROM productos";
-        try{
+        try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
-            while (rs.next()){
+            while (rs.next()) {
                 Productos pro = new Productos();
                 pro.setId(rs.getInt("id"));
                 pro.setCodigo(rs.getString("codigo"));
@@ -62,34 +63,36 @@ public class ProductosDao {
                 pro.setStock(rs.getInt("stock"));
                 pro.setPrecio(rs.getDouble("precio"));
                 Listapro.add(pro);
-                
+
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.toString());
         }
         return Listapro;
-    } 
-     public boolean EliminarProductos(int id){
+    }
+
+    public boolean EliminarProductos(int id) {
         String sql = "DELETE FROM productos WHERE id = ?";
         try {
             ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ps.execute();
             return true;
-        }catch (SQLException e){
-            System.out.println(e.toString());    
+        } catch (SQLException e) {
+            System.out.println(e.toString());
             return false;
-        }finally{
-            try{
+        } finally {
+            try {
                 con.close();
-            }catch(SQLException ex){
+            } catch (SQLException ex) {
                 System.out.println(ex.toString());
             }
         }
     }
-         public boolean ModificarProductos(Productos pro){
+
+    public boolean ModificarProductos(Productos pro) {
         String sql = "UPDATE productos SET codigo=?, nombre=?, proveedor=?, stock=?, precio=? WHERE id=?";
-        try{
+        try {
             ps = con.prepareStatement(sql);
             ps.setString(1, pro.getCodigo());
             ps.setString(2, pro.getNombre());
@@ -99,64 +102,67 @@ public class ProductosDao {
             ps.setInt(6, pro.getId());
             ps.execute();
             return true;
-            
-        }catch (SQLException e){
+
+        } catch (SQLException e) {
             System.out.println(e.toString());
             return false;
-        }finally{
-            try{
+        } finally {
+            try {
                 con.close();
-            }catch(SQLException e){
+            } catch (SQLException e) {
                 System.out.println(e.toString());
             }
         }
-        
+
     }
-         public Productos BuscarPro(String cod){
-             Productos producto = new Productos();
-             String sql = "SELECT * FROM productos WHERE codigo =?";
-             try{
-                 con = cn.getConnection();
-                 ps = con.prepareStatement(sql);
-                 ps.setString(1, cod);
-                 rs = ps.executeQuery();
-                 if (rs.next()) {
-                     producto.setNombre(rs.getString("nombre"));
-                     producto.setPrecio(rs.getDouble("precio"));
-                     producto.setStock(rs.getInt("stock"));
-                     
-                 }
-             }catch (SQLException e){
-                 System.out.println(e.toString());
-             }
-             return producto;
-         }
-         
-          public Config BuscarDatos(){
-             Config conf = new Config();
-             String sql = "SELECT * FROM config";
-             try{
-                 con = cn.getConnection();
-                 ps = con.prepareStatement(sql);
-                 rs = ps.executeQuery();
-                 if (rs.next()) {
-                     conf.setId(rs.getInt("id"));
-                     conf.setRuc(rs.getInt("ruc"));
-                     conf.setNombre(rs.getString("nombre"));
-                     conf.setTelefono(rs.getInt("telefono"));
-                     conf.setDireccion(rs.getString("direccion"));
-                     conf.setDireccion(rs.getString("direccion"));
-                     
-                 }
-             }catch (SQLException e){
-                 System.out.println(e.toString());
-             }
-             return conf;
-         }
-          
-           public boolean ModificarDatos(Config conf){
+
+    public Productos BuscarPro(String cod) {
+        Productos producto = new Productos();
+        String sql = "SELECT * FROM productos WHERE codigo =?";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, cod);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                producto.setNombre(rs.getString("nombre"));
+                producto.setPrecio(rs.getDouble("precio"));
+                producto.setStock(rs.getInt("stock"));
+
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return producto;
+    }
+
+    public Config BuscarDatos() {
+        Config conf = new Config();
+        String sql = "SELECT * FROM config";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                conf.setId(rs.getInt("id"));
+                conf.setRuc(rs.getInt("ruc"));
+                conf.setNombre(rs.getString("nombre"));
+                conf.setTelefono(rs.getInt("telefono"));
+                conf.setDireccion(rs.getString("direccion"));
+                conf.setDireccion(rs.getString("direccion"));
+
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return conf;
+    }
+
+    public int ModificarDatos(Config conf) {
         String sql = "UPDATE config SET ruc=?, nombre=?, telefono=?, direccion=?, razon=? WHERE id=?";
-        try{
+        int inserto = 0;
+        try {
+            con = cn.getConnection();
             ps = con.prepareStatement(sql);
             ps.setInt(1, conf.getRuc());
             ps.setString(2, conf.getNombre());
@@ -164,20 +170,19 @@ public class ProductosDao {
             ps.setString(4, conf.getDireccion());
             ps.setString(5, conf.getRazon());
             ps.setInt(6, conf.getId());
-            ps.execute();
-            return true;
-            
-        }catch (SQLException e){
+            inserto = ps.executeUpdate();
+
+        } catch (SQLException e) {
             System.out.println(e.toString());
-            return false;
-        }finally{
-            try{
+            return inserto;
+        } finally {
+            try {
                 con.close();
-            }catch(SQLException e){
+            } catch (SQLException e) {
                 System.out.println(e.toString());
             }
         }
-        
+        return inserto;
     }
-           
+
 }
